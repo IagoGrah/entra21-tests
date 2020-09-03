@@ -1,8 +1,8 @@
 using System;
 
-namespace primeira_aula
+namespace entra21_tests
 {
-    class Program
+    class Exercicios
     {
         static void xUm()
         {
@@ -212,20 +212,15 @@ namespace primeira_aula
             Console.WriteLine($"Foram gastos R${dinheiroGasto.ToString("F")}.");
         }
 
-        static void xOito()
+        public bool xOito(double x, double y)
         {
-            Console.WriteLine("X:");
-            double x = Double.Parse(Console.ReadLine());
-            Console.WriteLine("Y:");
-            double y = Double.Parse(Console.ReadLine());
-
             if (x % y != 0)
             {
-                Console.WriteLine("X NÃO é múltiplo de Y");
+                return false;
             }
             else
             {
-                Console.WriteLine("X é múltiplo de Y");
+                return true;
             }
         }
 
