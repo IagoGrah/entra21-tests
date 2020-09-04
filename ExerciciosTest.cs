@@ -67,36 +67,49 @@ namespace entra21_tests
         }
     }
 
+    public class xSeteTests
+    {
+        [Fact]
+        public void should_return_4197_dot_5()
+        {
+            var exercises = new Exercicios();
+
+            var result = exercises.xSete(4, 23, 2.50);
+
+            Assert.Equal(4197.5, result);
+        }
+    }
+    
     public class xOitoTests
     {
         [Fact]
         public void should_return_true_when_multiples()
         {
-        //Given
-        var exercises = new Exercicios();
-        double x = 60;
-        double y = 3;
+            //Given
+            var exercises = new Exercicios();
+            double x = 60;
+            double y = 3;
 
-        //When
-        bool isMultiple = exercises.xOito(x, y);
-        
-        //Then
-        Assert.True(isMultiple);
+            //When
+            bool isMultiple = exercises.xOito(x, y);
+            
+            //Then
+            Assert.True(isMultiple);
         }
 
         [Fact]
         public void should_return_false_when_not_multiples()
         {
-        //Given
-        var exercises = new Exercicios();
-        double x = 54;
-        double y = 8;
+            //Given
+            var exercises = new Exercicios();
+            double x = 54;
+            double y = 8;
 
-        //When
-        bool isMultiple = exercises.xOito(x, y);
-        
-        //Then
-        Assert.False(isMultiple);
+            //When
+            bool isMultiple = exercises.xOito(x, y);
+            
+            //Then
+            Assert.False(isMultiple);
         }
     }
 }

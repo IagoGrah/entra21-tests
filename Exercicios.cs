@@ -171,21 +171,9 @@ namespace entra21_tests
             }
         }
 
-        static void xSete()
+        public double xSete(double cigDia, double anos, double preco)
         {
-            int cigDia = 0;
-            int anos = 0;
-            double preco = 0.00;
-            
-            Console.WriteLine("Quantos cigarros são fumados por dia?");
-            cigDia = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Quantos anos fumando?");
-            anos = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Qual o preço da carteira?");
-            preco = double.Parse(Console.ReadLine());
-            
-            double dinheiroGasto = ((cigDia*preco/20)*365)*anos;
-            Console.WriteLine($"Foram gastos R${dinheiroGasto.ToString("F")}.");
+            return ((cigDia*preco/20)*365)*anos;
         }
 
         public bool xOito(double x, double y)
