@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace entra21_tests
 {
@@ -49,58 +50,33 @@ namespace entra21_tests
             }
         }
 
-        static void xQuatro()
+        public double xQuatro(List<int> ages)
         {
-            string userInput = null;
-            double counter = 0;
-            double sum = 0;
-            double ageInput = 0;
-            
-            Console.WriteLine("Insira as idades dos alunos, quando terminar insira 0:");
-            
-            while (userInput != "0")
+            if (ages.Count <= 0)
             {
-                userInput = Console.ReadLine();
-                bool isAge = Double.TryParse(userInput, out ageInput);
-                if (!isAge)
-                {
-                    Console.WriteLine("ERRO, insira um número inteiro.");
-                    continue;
-                }
-                sum += ageInput;
-                counter++;
+                return 0;
             }
-            Console.WriteLine($"A média de idade dos {counter-1} alunos é {(sum/(counter-1)).ToString("F")}.");
+            
+            double sum = 0;
+            
+            foreach (var item in ages)
+            {
+                sum += item;
+            }
+
+            return sum/ages.Count;
         }
 
-        static void xCinco()
+        public double xCinco(List<(string name, int age)> women)
         {
-            int[] idades = new int[5];
-            string[] nomes = new string[5];
-            string[] nomesNaFaixa = new string[5];
+            double naFaixa = 0;
+            
+            foreach (var item in women)
+            {
+                if (item.age >= 18 && item.age <= 35){naFaixa++;}
+            }
 
-            for (int i=0; i<5; i++)
-            {
-                System.Console.WriteLine($"Nome da Mulher {i+1}:");
-                nomes[i] = Console.ReadLine();
-                System.Console.WriteLine($"Idade da Mulher {i+1}:");
-                idades[i] = Int32.Parse(Console.ReadLine());
-            }
-            int naFaixa = 0;
-            for (int i=0; i<5; i++)
-            {
-                if (idades[i] < 36 && idades[i] > 17)
-                {
-                    naFaixa++;
-                    nomesNaFaixa[i] = nomes[i];
-                }
-            }
-            Console.WriteLine($"{naFaixa*20}% das mulheres estão na faixa entre 18 e 35 anos:");
-            foreach (var name in nomesNaFaixa)
-            {
-                if (!String.IsNullOrEmpty(name))
-                {Console.Write(name+" ");}
-            }
+            return (100.0/women.Count)*naFaixa;
         }
 
         static void xSeis()
