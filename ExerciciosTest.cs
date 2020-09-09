@@ -87,11 +87,9 @@ namespace entra21_tests
         {
             //Given
             var exercises = new Exercicios();
-            double x = 60;
-            double y = 3;
 
             //When
-            bool isMultiple = exercises.xOito(x, y);
+            bool isMultiple = exercises.xOito(60, 3);
             
             //Then
             Assert.True(isMultiple);
@@ -102,14 +100,85 @@ namespace entra21_tests
         {
             //Given
             var exercises = new Exercicios();
-            double x = 54;
-            double y = 8;
 
             //When
-            bool isMultiple = exercises.xOito(x, y);
+            bool isMultiple = exercises.xOito(54, 8);
             
             //Then
             Assert.False(isMultiple);
+        }
+    }
+
+    public class xNoveTests
+    {
+        [Fact]
+        public void should_return_false_when_x_smaller_than_sum_of_y_and_z()
+        {
+            var exercises = new Exercicios();
+
+            bool isBiggerThanSum = exercises.xNove(34.2, 12.76543, 67);
+
+            Assert.False(isBiggerThanSum);
+        }
+
+        [Fact]
+        public void should_return_true_when_x_bigger_than_sum_of_y_and_z()
+        {
+            var exercises = new Exercicios();
+
+            bool isBiggerThanSum = exercises.xNove(9999, 0.0005, 15.123521345);
+
+            Assert.True(isBiggerThanSum);
+        }
+    }
+
+    public class xTrezeTests
+    {
+        [Fact]
+        public void should_return_167()
+        {
+            var exercises = new Exercicios();
+            var myList = new List<double>()
+            {65.2, 89.1, 58, 167, -54, 0};
+
+            double result = exercises.xTreze(myList);
+
+            Assert.Equal(167, result);
+        }
+
+        [Fact]
+        public void should_return_n12()
+        {
+            var exercises = new Exercicios();
+            var myList = new List<double>()
+            {-15.2, -676.3, -12};
+
+            double result = exercises.xTreze(myList);
+
+            Assert.Equal(-12, result);
+        }
+    }
+
+    public class xDezoitoTests
+    {
+        [Fact]
+        public void should_return_33dot1()
+        {
+            var exercises = new Exercicios();
+
+            double result = exercises.xDezoito(31);
+
+            Assert.Equal(33.1, result);
+        }
+
+        [Fact]
+        public void should_return_24()
+        {
+            var exercises = new Exercicios();
+
+            double result = exercises.xDezoito(24);
+
+            Assert.Equal(24, result);
         }
     }
 }

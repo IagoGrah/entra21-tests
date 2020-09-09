@@ -188,16 +188,9 @@ namespace entra21_tests
             }
         }
 
-        static void xNove()
+        public bool xNove(double x, double y, double z)
         {
-            Console.WriteLine("X:");
-            double x = Double.Parse(Console.ReadLine());
-            Console.WriteLine("Y:");
-            double y = Double.Parse(Console.ReadLine());
-            Console.WriteLine("Z:");
-            double z = Double.Parse(Console.ReadLine());
-
-            Console.WriteLine(x > (y+z) ? "X é maior que a soma de Y e Z" : "X não é maior que a soma de Y e Z");
+            return x > (y+z) ? true : false;
         }
 
         static void xDez()
@@ -258,16 +251,15 @@ namespace entra21_tests
             Console.WriteLine($"Soma dos ímpares: {sumOdd}");
         }
 
-        static void xTreze()
+        public double xTreze(List<double> input)
         {
             double biggest = Double.MinValue;
-            System.Console.WriteLine("Insira dez números:");
-            for (int c=1; c<=10; c++)
+            foreach (var item in input)
             {
-                double input = Double.Parse(Console.ReadLine());
-                if (input > biggest) {biggest = input;}
+                if (item > biggest) {biggest = item;}
             }
-            System.Console.WriteLine($"O maior número é {biggest}.");
+
+            return biggest;
         }
 
         static void xQuatorze()
@@ -358,14 +350,9 @@ namespace entra21_tests
             Console.WriteLine("\nENCERRADO");
         }
 
-        static void xDezoito()
+        public double xDezoito(int macas)
         {
-            Console.WriteLine("Quantas maçãs foram compradas?");
-            int macas = Int32.Parse(Console.ReadLine());
-            int indiv = macas % 12;
-            double preco = (indiv*1.30) + (((int)macas/12)*12);
-
-            Console.WriteLine($"R${preco.ToString("F")}");
+            return ((macas%12)*1.30) + (((int)macas/12)*12);
         }
     }
 }
