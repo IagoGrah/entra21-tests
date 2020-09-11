@@ -67,107 +67,31 @@ namespace entra21_tests
             return sum/ages.Count;
         }
 
-        public double xCinco(List<(string name, int age)> women)
+        public double xCinco(List<double> women)
         {
             double naFaixa = 0;
             
-            foreach (var item in women)
+            foreach (var age in women)
             {
-                if (item.age >= 18 && item.age <= 35){naFaixa++;}
+                if (age >= 18 && age <= 35){naFaixa++;}
             }
 
             return (100.0/women.Count)*naFaixa;
         }
 
-        static void xSeis()
-        {
-            string candidato1 = "";
-            string candidato2 = "";
-            double votos1 = 0.0;
-            double votos2 = 0.0;
-          
-          menu:
-            Console.WriteLine("Digite C para CADASTRAR, V para VOTAR, ou A para apurar:");
-            var menuInput = Console.ReadLine();
-            if (menuInput == "C") {
-                goto modoCadastro;
-            } else if (menuInput == "V") {
-                goto modoVoto;
-            } else if (menuInput == "A") {
-                goto modoApura;
-            } else {
-                Console.WriteLine("ERRO");
-                goto menu;
-            };
-          
-          modoCadastro:
-            if (candidato1 != "")
-            {
-                Console.WriteLine("CANDIDATOS JÁ REGISTRADOS");
-                goto menu;
-            }
-            
-            Console.WriteLine("Insira a Senha:");
-            if (Console.ReadLine() != "Pa$$w0rd")
-            {
-                Console.WriteLine("SENHA INCORRETA");
-                goto modoCadastro;
-            }
-            Console.WriteLine("Insira o nome do candidato 1:");
-            candidato1 = Console.ReadLine();
-            Console.WriteLine("Insira o nome do candidato 2:");
-            candidato2 = Console.ReadLine();
-            Console.WriteLine("CADASTRO COMPLETO");
-            goto menu;
-
-          modoVoto:
-            if (candidato1 == "" || candidato2 == "")
-            {
-                Console.WriteLine("CANDIDATOS NÃO CADASTRADOS");
-                goto menu;
-            }
-            Console.WriteLine($"Digite 1 para votar em {candidato1}, ou digite 2 para votar em {candidato2}:");
-            var userVote = Console.ReadLine();
-            if (userVote == "1") { votos1++; }
-            else if(userVote == "2") { votos2++; }
-            else {
-                Console.WriteLine("ERRO");
-                goto modoVoto;
-            }
-            Console.WriteLine("VOTO CONTABILIZADO");
-            Console.Beep();
-            goto menu;
-
-          modoApura:
-            Console.WriteLine("Insira a Senha:");
-            if (Console.ReadLine() != "Pa$$w0rd")
-            {
-                Console.WriteLine("SENHA INCORRETA");
-                goto modoApura;
-            }
-            
-            if (candidato1 == "" || candidato2 == "")
-            {
-                Console.WriteLine("CANDIDATOS NÃO CADASTRADOS");
-                goto menu;
-            }
-            
+        public string xSeis(string candidato1, string candidato2, double votos1, double votos2)
+        {            
             if (votos1>votos2) 
             { 
-                Console.WriteLine($"{candidato1} venceu de {votos1} a {votos2} com {(votos1*(100/(votos1+votos2))).ToString("F")}% dos votos!");
+                return candidato1;
             }
             else if (votos2>votos1)
             {
-                Console.WriteLine($"{candidato2} venceu de {votos2} a {votos1} com {(votos2*(100/(votos1+votos2))).ToString("F")}% dos votos!");
-            }
-            else if (votos1 == 0 && votos2 == 0)
-            {
-                Console.WriteLine("NENHUM VOTO REGISTRADO");
-                goto menu;
+                return candidato2;
             }
             else
             {
-                Console.WriteLine("SEGUNDO TURNO!");
+                return "Empate";
             }
         }
 
@@ -193,40 +117,29 @@ namespace entra21_tests
             return x > (y+z) ? true : false;
         }
 
-        static void xDez()
+        public string xDez(double A, double B)
         {
-            System.Console.WriteLine("Insira um número:");
-            double A = Double.Parse(Console.ReadLine());
-            System.Console.WriteLine("Insira outro número:");
-            double B = Double.Parse(Console.ReadLine());
-
             if (A>B)
             {
-                System.Console.WriteLine($"{A} é maior que {B}.");
+                return $"{A}>{B}";
             } else if (B>A)
             {
-                System.Console.WriteLine($"{B} é maior que {A}.");
+                return $"{B}>{A}";
             } else
             {
-                System.Console.WriteLine($"{A} é igual a {B}.");
+                return $"{A}={B}";
             }
         }
 
-        static void xOnze()
+        public double xOnze(double A, double B)
         {
-            System.Console.WriteLine("Divisor:");
-            double A = Double.Parse(Console.ReadLine());
-            System.Console.WriteLine("Dividendo:");
-            double B = Double.Parse(Console.ReadLine());
-
             if (B!=0)
             {
-                Console.WriteLine("Quociente:");
-                Console.WriteLine(A/B);
+                return A/B;
             }
             else
             {
-                Console.WriteLine("DIVISÃO POR ZERO!");
+                return 0;
             }
         }
 
