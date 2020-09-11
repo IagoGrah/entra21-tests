@@ -75,13 +75,10 @@ namespace entra21_tests
         [InlineData(-54, -9, true)]
         public void should_return_true_when_multiples(double a, double b, bool expected)
         {
-            //Given
             var exercises = new Exercicios();
 
-            //When
             bool result = exercises.xOito(a, b);
             
-            //Then
             Assert.Equal(expected, result);
         }
     }
@@ -133,6 +130,22 @@ namespace entra21_tests
         }
     }
 
+    public class xDozeTests
+    {
+        [Theory]
+        [InlineData(new int[3]{5, 0, 2}, 2, 5)]
+        [InlineData(new int[7]{56, 45, 23, 22, 33, 12, 10}, 100, 101)]
+        public void should_return_sum_of_evens_and_sum_of_odds(int[] numbers, int sumEvens, int sumOdds)
+        {
+            var exercises = new Exercicios();
+
+            var result = exercises.xDoze(numbers);
+            (int, int) expected = (sumEvens, sumOdds);
+
+            Assert.Equal(expected, result);
+        }
+    }
+
     public class xTrezeTests
     {
         [Theory]
@@ -143,6 +156,70 @@ namespace entra21_tests
             var exercises = new Exercicios();
 
             double result = exercises.xTreze(input.ToList());
+
+            Assert.Equal(expected, result);
+        }
+    }
+
+    public class xQuatorzeTests
+    {
+        [Theory]
+        [InlineData(new double[3]{5, 4, 9}, "4 < 5 < 9")]
+        [InlineData(new double[6]{0.4, 28, -43, 0, 2, 999}, "-43 < 0 < 0,4 < 2 < 28 < 999")]
+        [InlineData(new double[2]{0, 0}, "0 < 0")]
+        public void should_return_crescent_string(double[] numbers, string expected)
+        {
+            var exercises = new Exercicios();
+
+            string result = exercises.xQuatorze(numbers.ToList());
+
+            Assert.Equal(expected, result);
+        }
+    }
+
+    public class xQuinzeTests
+    {
+        [Theory]
+        [InlineData(new double[3]{15, 21, 33}, 3, 1)]
+        [InlineData(new double[7]{56, 45, 23, 22, 33, 12, 10}, 3, 2)]
+        public void should_return_how_many_multiples_of_3_and_of_5(double[] numbers, int multi3, int multi5)
+        {
+            var exercises = new Exercicios();
+
+            var result = exercises.xQuinze(numbers.ToList());
+            (int, int) expected = (multi3, multi5);
+
+            Assert.Equal(expected, result);
+        }
+    }
+    
+    public class xDezesseisTests
+    {
+        [Theory]
+        [InlineData(450, 450)]
+        [InlineData(1000, 800)]
+        [InlineData(1500, 1125)]
+        [InlineData(3000, 2100)]
+        public void should_return_liquid_salary(double salary, double expected)
+        {
+            var exercises = new Exercicios();
+
+            var result = exercises.xDezesseis(salary);
+
+            Assert.Equal(expected, result);
+        }
+    }
+
+    public class xDezesseteTests
+    {
+        [Theory]
+        [InlineData(4, 5, "4, 8, 12, 16, 20")]
+        [InlineData(2, 3, "2, 4, 6")]
+        public void should_return_y_multiples_of_x(double x, int y, string expected)
+        {
+            var exercises = new Exercicios();
+
+            var result = exercises.xDezessete(x, y);
 
             Assert.Equal(expected, result);
         }

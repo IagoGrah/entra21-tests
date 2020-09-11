@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace entra21_tests
 {
@@ -143,25 +144,16 @@ namespace entra21_tests
             }
         }
 
-        static void xDoze()
+        public (int, int) xDoze(int[] numbers)
         {
-            var arr = new double[4];
-            double sumEven = 0;
-            double sumOdd = 0;
+            (int even, int odd) sums = (0, 0);
 
-            System.Console.WriteLine($"Insira {arr.Length} números:");
-            for (int i = 0; i < arr.Length; i++)
+            foreach (var num in numbers)
             {
-                var input = Double.Parse(Console.ReadLine());
-                arr[i] = input;
+                if (num % 2 == 0) {sums.even += num;}
+                else {sums.odd += num;}
             }
-            foreach (var num in arr)
-            {
-                if (num % 2 == 0) {sumEven += num;}
-                else {sumOdd += num;}
-            }
-            Console.WriteLine($"Soma dos pares: {sumEven}");
-            Console.WriteLine($"Soma dos ímpares: {sumOdd}");
+            return sums;
         }
 
         public double xTreze(List<double> input)
@@ -175,45 +167,35 @@ namespace entra21_tests
             return biggest;
         }
 
-        static void xQuatorze()
+        public string xQuatorze(List<double> numbers)
         {
-            double[] inputs = new double[3];
-
-            Console.WriteLine("Insira três valores:");
-            for (int i=0; i<3; i++)
+            numbers.Sort();
+            var result = new StringBuilder();
+            foreach (var item in numbers)
             {
-                inputs[i] = Double.Parse(Console.ReadLine());
+                result.Append(item + " < ");
             }
-            Array.Sort(inputs);
-            Console.WriteLine();
-            Console.WriteLine($"{inputs[0]} < {inputs[1]} < {inputs[2]}");
+            result.Remove(result.Length-3, 3);
+
+            return result.ToString();
         }
 
-        static void xQuinze()
+        public (int, int) xQuinze(List<double> numbers)
         {
-            double[] inputs = new double[10];
-            Console.WriteLine("Insira dez números:");
-            for (int i=0; i<10; i++)
-            {
-                inputs[i] = Double.Parse(Console.ReadLine());
-            }
-            
             int multi3 = 0;
             int multi5 = 0;
-            for (int i=0; i<10; i++)
+            foreach (var item in numbers)
             {
-                if (inputs[i] != 0) {
-                if (inputs[i] % 3 == 0) {multi3++;}
-                if (inputs[i] % 5 == 0) {multi5++;} }
+                if (item != 0) {
+                if (item % 3 == 0) {multi3++;}
+                if (item % 5 == 0) {multi5++;} }
             }
-            
-            Console.WriteLine($"{multi3} múltiplos de 3;\n{multi5} múltiplos de 5.");
+
+            return (multi3, multi5);            
         }
 
-        static void xDezesseis()
+        public double xDezesseis(double salario)
         {
-            Console.WriteLine("Insira o salário:");
-            double salario = Double.Parse(Console.ReadLine());
             double desconto = 0;
             double imposto = 0;
 
@@ -235,32 +217,19 @@ namespace entra21_tests
             }
             desconto = salario/100*imposto;
             salario -= desconto;
-            if (imposto == 0)
-            {Console.WriteLine("Salário inafetado, isento de impostos");}
-            else {
-            Console.WriteLine($"Salário líquido de R${salario.ToString("F")}. Redução de impostos de {imposto}% (R${desconto.ToString("F")}).");
-            }
+            return salario;
         }
 
-        static void xDezessete()
+        public string xDezessete(double number, int reps)
         {
-            Console.WriteLine("Insira um número para ver a tabuada:");
-            double multi = Double.Parse(Console.ReadLine());
-            int counter = 2;
+            var output = new StringBuilder();
             
-            Console.Clear();
-            Console.WriteLine("Aperte ENTER para ver o próximo número, ou X para encerrar.");
-
-            while (true)
+            for (int i = 1; i <= reps; i++)
             {
-                if (Console.ReadKey().Key == ConsoleKey.X)
-                {
-                    break;    
-                }
-                Console.WriteLine($"{multi} x {counter} = {multi*counter}   ");
-                counter++;    
+                output.Append(number*i + ", ");
             }
-            Console.WriteLine("\nENCERRADO");
+            output.Remove(output.Length-2, 2);
+            return output.ToString();
         }
 
         public double xDezoito(int macas)
