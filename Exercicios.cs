@@ -4,51 +4,74 @@ using System.Text;
 
 namespace entra21_tests
 {
-    class Exercicios
+    public class Exercicios
     {
-        static void xUm()
+        public string xUmA()
         {
-            Console.WriteLine("Crescente:");
-
+            var str = new StringBuilder();
+            
             for (int i=1; i<=10; i++)
             {
-                Console.Write(i+" ");
+                str.Append(i + " ");
             }
 
-            Console.WriteLine("\nDecrescente:");
+            str.Remove(str.Length - 1, 1);
+            return str.ToString();
+        }
 
-             for (int i=10; i>=1; i--)
+        public string xUmB()
+        {
+            var str = new StringBuilder();
+            
+            for (int i=10; i>=1; i--)
             {
-                Console.Write(i+" ");
+                str.Append(i + " ");
             }
+            
+            str.Remove(str.Length - 1, 1);
+            return str.ToString();
+        }
 
-            Console.WriteLine("\nCrescente sem pares:");
+        public string xUmC()
+        {            
+            var str = new StringBuilder();
             
             for (int i=1; i<=10; i++)
             {
                 if (i % 2 != 0)
                 {
-                    Console.Write(i+" ");
+                 str.Append(i + " ");
                 }
             }
+
+            str.Remove(str.Length - 1, 1);
+            return str.ToString();
         }
         
-        static void xDois()
+        public int xDois()
         {
             int count = 0;
             for (int i=1; i<=100; i++)
             {
                 count += i;
             }
-            Console.WriteLine(count);
+            return count;
         }
 
-        static void xTres()
+        public string xTres()
         {
-            for (int i=1; i<200; i++)
+            var str = new StringBuilder();
+            
+            for (int i=1; i<=200; i++)
             {
-                if (i%2!=0) {Console.Write(i+" ");}
+                if (i % 2 != 0)
+                {
+                 str.Append(i + ",");
+                }
             }
+
+            str.Remove(str.Length - 1, 1);
+            return str.ToString();
         }
 
         public double xQuatro(List<int> ages)
