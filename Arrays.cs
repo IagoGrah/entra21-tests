@@ -24,76 +24,30 @@ namespace entra21_tests
             return input.ToArray();
         }
 
-        public void yTres()
+        public bool yTres(double[] arr, double num)
         {
-            double[] input = new double[10];
+            return arr.Contains(num);
+        }
 
-            Console.Clear();
-            Console.WriteLine("Insira 10 números:");
-            for (int i=0; i<10; i++)
+        public bool yQuatro(double[] arrA, double[] arrB)
+        {
+            if (arrA.Length != arrB.Length)
             {
-                input[i] = Double.Parse(Console.ReadLine());
+                return false;
             }
-
-            Console.Clear();
-            Console.WriteLine("Insira um número para procurar no array:");
-            double userNum = Double.Parse(Console.ReadLine());
-            foreach (double item in input)
+            else
             {
-                if (item == userNum)
+                for (int i = 0; i < arrA.Length; i++)
                 {
-                    Console.WriteLine("O número se encontra no array na posição "+ Array.IndexOf(input, item)+".");
-                    break;
+                    if (arrA[i] != arrB[i]){return false;}
                 }
+                return true;
             }
         }
 
-        public void yQuatro()
+        public (double, int, int, int) yCinco(double[] arr)
         {
-            double[] A = new double[10];
-            double[] B = new double[10];
-
-            Console.Clear();
-            Console.WriteLine("Insira os 10 números de A:");
-            for (int i=0; i<10; i++)
-            {
-                A[i] = Double.Parse(Console.ReadLine());
-            }
-
-            Console.Clear();
-            Console.WriteLine("Insira os 10 números de B:");
-            for (int i=0; i<10; i++)
-            {
-                B[i] = Double.Parse(Console.ReadLine());
-            }
-
-            Console.Clear();
-            for (int i=0; i<10; i++)
-            {
-                if (A[i] != B[i])
-                {
-                    Console.WriteLine("A e B NÃO são arrays idênticos.");
-                    return;
-                }
-            }
-
-            Console.WriteLine("A e B são arrays idênticos.");
-        }
-
-        public void yCinco()
-        {
-            double[] arr = new double[15];
-
-            Console.Clear();
-            Console.WriteLine("Insira 15 números:");
-            for (int i=0; i<15; i++)
-            {
-                arr[i] = Double.Parse(Console.ReadLine());
-            }
-            
-            double avg = arr.Sum()/15;
-            Console.Clear();
-            Console.WriteLine("Média = " + avg);
+            double avg = arr.Sum()/arr.Length;
             int onAvg = 0;
             int aboveAvg = 0;
             int belowAvg = 0;
@@ -103,43 +57,26 @@ namespace entra21_tests
                 else if (item < avg) {belowAvg++;}
                 else {aboveAvg++;}
             }
-            Console.WriteLine("O array contém:");
-            Console.WriteLine(onAvg+" números na média,");
-            Console.WriteLine(aboveAvg+" números acima da média e");
-            Console.WriteLine(belowAvg+" números abaixo da média.");
+
+            return (avg, belowAvg, onAvg, aboveAvg);
         }
 
-        public void ySeis()
+        public double[] ySeis(double[] arrA, double[] arrB)
         {
-            double[] A = new double[12];
-            double[] B = new double[12];
-            double[] C = new double[12];
+            double[] arrC = new double[arrA.Length];
 
-            Console.Clear();
-            Console.WriteLine("Insira os 12 números de A:");
-            for (int i=0; i<12; i++)
-            {
-                A[i] = Double.Parse(Console.ReadLine());
-            }
-            Array.Sort(A);
+            Array.Sort(arrA);
 
-            Console.WriteLine("Insira os 12 números de B:");
-            for (int i=0; i<12; i++)
-            {
-                B[i] = Double.Parse(Console.ReadLine());
-            }
-            Array.Sort(B);
-            Array.Reverse(B);
+            Array.Sort(arrB);
+            Array.Reverse(arrB);
 
-            for (int i=0; i<12; i++)
+            for (int i=0; i<arrC.Length; i++)
             {
-                C[i] = A[i] + B[i];
+                arrC[i] = arrA[i] + arrB[i];
             }
-            Array.Sort(C);
-            
-            Console.Clear();
-            Console.WriteLine("Array C:");
-            Console.WriteLine(string.Join(", ", C));
+            Array.Sort(arrC);
+
+            return arrC;
         }
     }
 }
