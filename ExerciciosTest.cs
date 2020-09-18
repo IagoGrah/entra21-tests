@@ -276,13 +276,14 @@ namespace entra21_tests
     public class xDezesseteTests
     {
         [Theory]
-        [InlineData(4, 5, "4, 8, 12, 16, 20")]
-        [InlineData(2, 3, "2, 4, 6")]
-        public void should_return_y_multiples_of_x(double x, int y, string expected)
+        [InlineData(6, new double[5]{1, 3, 5, 7, 9}, new double[5]{6, 18, 30, 42, 54})]
+        [InlineData(3.5, new double[3]{1, 2, 3}, new double[3]{3.5, 7, 10.5})]
+        [InlineData(0, new double[4]{0.65, -43, 999, 0}, new double[4]{0, 0, 0, 0})]
+        public void should_return_x_multiplied_by_numbers_of_array(double x, double[] multiples, double[] expected)
         {
             var exercises = new Exercicios();
 
-            var result = exercises.xDezessete(x, y);
+            var result = exercises.xDezessete(x, multiples.ToList());
 
             Assert.Equal(expected, result);
         }

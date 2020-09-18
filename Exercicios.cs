@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace entra21_tests
 {
@@ -243,16 +244,9 @@ namespace entra21_tests
             return salario;
         }
 
-        public string xDezessete(double number, int reps)
+        public IEnumerable<double> xDezessete(double number, List<double> multiples)
         {
-            var output = new StringBuilder();
-            
-            for (int i = 1; i <= reps; i++)
-            {
-                output.Append(number*i + ", ");
-            }
-            output.Remove(output.Length-2, 2);
-            return output.ToString();
+            return multiples.Select(item => item*number);
         }
 
         public double xDezoito(int macas)
