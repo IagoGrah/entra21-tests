@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Xunit;
 using System.Linq;
 
@@ -94,23 +93,6 @@ namespace entra21_tests
             var exercises = new Exercicios();
 
             double result = exercises.xCinco(ages.ToList());
-
-            Assert.Equal(expected, result);
-        }
-    }
-
-    public class xSeisTests
-    {
-        [Theory]
-        [InlineData("Jefferson", "Ramalho", 17, 16, "Jefferson")]
-        [InlineData("Koala", "Panda", 0, 1900, "Panda")]
-        [InlineData("Bob", "Outro Bob", -5, -5, "Empate")]
-
-        public void should_return_winner_or_Empate(string candidato1, string candidato2, double votos1, double votos2, string expected)
-        {
-            var exercises = new Exercicios();
-
-            var result = exercises.xSeis(candidato1, candidato2, votos1, votos2);
 
             Assert.Equal(expected, result);
         }

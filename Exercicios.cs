@@ -104,21 +104,23 @@ namespace entra21_tests
             return (100.0/women.Count)*naFaixa;
         }
 
-        public string xSeis(string candidato1, string candidato2, double votos1, double votos2)
-        {            
-            if (votos1>votos2) 
-            { 
-                return candidato1;
-            }
-            else if (votos2>votos1)
-            {
-                return candidato2;
-            }
-            else
-            {
-                return "Empate";
-            }
-        }
+        // Exercicio refatorado para Election.cs
+        //
+        // public string xSeis(string candidato1, string candidato2, double votos1, double votos2)
+        // {            
+        //     if (votos1>votos2) 
+        //     { 
+        //         return candidato1;
+        //     }
+        //     else if (votos2>votos1)
+        //     {
+        //         return candidato2;
+        //     }
+        //     else
+        //     {
+        //         return "Empate";
+        //     }
+        // }
 
         public double xSete(double cigDia, double anos, double preco)
         {
