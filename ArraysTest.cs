@@ -25,13 +25,14 @@ namespace entra21_tests
         [InlineData(new int[4]{1, 3, 2, 4}, new int[4]{4, 2, 3, 1})]
         [InlineData(new int[2]{-43, 0}, new int[2]{0, -43})]
         [InlineData(new int[3]{0, 5, 0}, new int[3]{0, 5, 0})]
-        public void should_return_reversed(int[] input, int[] expected)
+        public void should_return_reversed(int[] input, int[] expectedReverse)
         {
             var arrays = new Arrays();
 
             var result = arrays.yDois(input.ToList());
 
-            Assert.Equal(expected, result);
+            Assert.Equal(input, result.Item1);
+            Assert.Equal(expectedReverse, result.Item2);
         }
     }
 

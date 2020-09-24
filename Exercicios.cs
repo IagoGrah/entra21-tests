@@ -246,9 +246,9 @@ namespace entra21_tests
             return salario;
         }
 
-        public IEnumerable<double> xDezessete(double number, List<double> multiples)
+        public List<double> xDezessete(double number, List<double> multiples)
         {
-            return multiples.Select(item => item*number);
+            return multiples.Select(item => item*number).ToList();
         }
 
         public double xDezoito(int macas)

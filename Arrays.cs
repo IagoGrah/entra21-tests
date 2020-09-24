@@ -18,10 +18,13 @@ namespace entra21_tests
             return C;
         }
 
-        public int[] yDois(List<int> input)
+        public (int[], int[]) yDois(List<int> input)
         {
+            var inputNormal = input.ToArray();  
             input.Reverse();
-            return input.ToArray();
+            
+            var inputReverse = input.ToArray();
+            return (inputNormal, inputReverse);
         }
 
         public bool yTres(double[] arr, double num)
