@@ -7,7 +7,7 @@ namespace entra21_tests
     public class Election
     {
         public List<(Guid id, string name, string cpf, int votes)> Candidates
-        {get; set;}
+        {get; private set;}
 
         public bool TryCreateCandidates(List<(string name, string cpf)> candidatesInput, string password)
         {
