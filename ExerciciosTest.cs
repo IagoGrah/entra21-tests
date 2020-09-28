@@ -1,5 +1,6 @@
 using Xunit;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace entra21_tests
 {
@@ -68,10 +69,19 @@ namespace entra21_tests
     
     public class xQuatroTests
     {
+        [Fact]
+        public void should_throw_exception_if_empty_array()
+        {
+            var exercises = new Exercicios();
+
+            var input = new List<int>();
+
+            Assert.Throws<System.ArgumentException>(() => exercises.xQuatro(input));            
+        }
+        
         [Theory]
         [InlineData(new int[2]{17, 15}, 16)]
         [InlineData(new int[4]{13, 14, 15, 16}, 14.5)]
-        [InlineData(new int[0], 0)]
 
         public void should_return_average(int[] ages, double expected)
         {

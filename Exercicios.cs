@@ -79,7 +79,7 @@ namespace entra21_tests
         {
             if (ages.Count <= 0)
             {
-                return 0;
+                throw new ArgumentException("Empty/negative input");
             }
             
             double sum = 0;
@@ -129,14 +129,7 @@ namespace entra21_tests
 
         public bool xOito(double x, double y)
         {
-            if (x % y != 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return x%y != 0 ? false : true;
         }
 
         public bool xNove(double x, double y, double z)
@@ -160,14 +153,7 @@ namespace entra21_tests
 
         public double xOnze(double A, double B)
         {
-            if (B!=0)
-            {
-                return A/B;
-            }
-            else
-            {
-                return 0;
-            }
+            return B!=0 ? A/B : 0;
         }
 
         public (int, int) xDoze(int[] numbers)
