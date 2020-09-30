@@ -6,15 +6,15 @@ namespace entra21_tests
 {
     public class Election
     {
-        private List<(Guid id, string name, string cpf, int votes)> candidates {get; set;}
+        private List<Candidate> candidates {get; set;}
 
-        public IReadOnlyCollection<(Guid id, string name, string cpf, int votes)> Candidates => candidates;
+        public IReadOnlyCollection<Candidate> Candidates => candidates;
 
         public bool TryCreateCandidates(List<(string name, string cpf)> candidatesInput, string password)
         {
             if (password == "Pa$$w0rd")
             {
-                candidates = candidatesInput.Select(candidate => {return (Guid.NewGuid(), candidate.name, candidate.cpf, 0);}).ToList();
+                candidates = candidatesInput.Select(candidate => {return (new Candidate(candidate.name, candidate.cpf));}).ToList();
                 return true;
             }
             else
@@ -25,38 +25,35 @@ namespace entra21_tests
 
         public Guid GetCandidateIdByCPF(string cpf)
         {
-            return candidates.Find(x => x.cpf == cpf).id;
+            return candidates.Find(x => x.Cpf == cpf).Id;
         }
 
         public List<Guid> GetCandidateIdsByName(string name)
         {
-            var foundCandidates = candidates.Where(x => x.name == name);
-            return foundCandidates.Select(x => x.id).ToList();
+            var foundCandidates = candidates.Where(x => x.Name == name);
+            return foundCandidates.Select(x => x.Id).ToList();
         }
 
         public void Vote(Guid id)
         {
-            candidates = candidates.Select(candidate => {
-                return candidate.id == id
-                    ? (candidate.id, candidate.name, candidate.cpf, candidate.votes + 1)
-                    : candidate; 
-            }).ToList();
+            var votedCandidate = candidates.Find(x => x.Id == id);
+            votedCandidate.Vote();
         }
 
-        public List<(Guid id, string name, string cpf, int votes)> Poll(string password)
+        public List<Candidate> Poll(string password)
         {
-            var winners = new List<(Guid id, string name, string cpf, int votes)>();
+            var winners = new List<Candidate>();
             
             if (password != "Pa$$w0rd")
             {
-                winners.Add((Guid.Empty, null, null, 0));
+                winners.Add(null);
             }
             else
             {
-                var mostVotes = candidates.Max(candidate => candidate.votes);
+                var mostVotes = candidates.Max(candidate => candidate.GetVotes());
                 foreach (var candidate in candidates)
                 {
-                    if (candidate.votes == mostVotes)
+                    if (candidate.GetVotes() == mostVotes)
                     {
                         winners.Add(candidate);
                     }

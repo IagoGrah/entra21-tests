@@ -1,0 +1,33 @@
+using System;
+
+namespace entra21_tests
+{
+    public class Candidate
+    {
+        public Guid Id {get; private set;}
+
+        public string Name {get; private set;}
+
+        public string Cpf {get; private set;}
+
+        private int Votes {get; set;}
+
+        public Candidate(string name, string cpf)
+        {
+            this.Id = Guid.NewGuid();
+            this.Name = name;
+            this.Cpf = cpf;
+            this.Votes = 0;
+        }
+
+        public void Vote()
+        {
+            Votes++;
+        }
+
+        public int GetVotes()
+        {
+            return Votes;
+        }
+    }
+}
