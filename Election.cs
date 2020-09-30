@@ -6,14 +6,15 @@ namespace entra21_tests
 {
     public class Election
     {
-        public List<(Guid id, string name, string cpf, int votes)> Candidates
-        {get; private set;}
+        private List<(Guid id, string name, string cpf, int votes)> candidates {get; set;}
+
+        public IReadOnlyCollection<(Guid id, string name, string cpf, int votes)> Candidates => candidates;
 
         public bool TryCreateCandidates(List<(string name, string cpf)> candidatesInput, string password)
         {
             if (password == "Pa$$w0rd")
             {
-                Candidates = candidatesInput.Select(candidate => {return (Guid.NewGuid(), candidate.name, candidate.cpf, 0);}).ToList();
+                candidates = candidatesInput.Select(candidate => {return (Guid.NewGuid(), candidate.name, candidate.cpf, 0);}).ToList();
                 return true;
             }
             else
@@ -24,18 +25,18 @@ namespace entra21_tests
 
         public Guid GetCandidateIdByCPF(string cpf)
         {
-            return Candidates.Find(x => x.cpf == cpf).id;
+            return candidates.Find(x => x.cpf == cpf).id;
         }
 
         public List<Guid> GetCandidateIdsByName(string name)
         {
-            var foundCandidates = Candidates.Where(x => x.name == name);
+            var foundCandidates = candidates.Where(x => x.name == name);
             return foundCandidates.Select(x => x.id).ToList();
         }
 
         public void Vote(Guid id)
         {
-            Candidates = Candidates.Select(candidate => {
+            candidates = candidates.Select(candidate => {
                 return candidate.id == id
                     ? (candidate.id, candidate.name, candidate.cpf, candidate.votes + 1)
                     : candidate; 
@@ -52,8 +53,8 @@ namespace entra21_tests
             }
             else
             {
-                var mostVotes = Candidates.Max(candidate => candidate.votes);
-                foreach (var candidate in Candidates)
+                var mostVotes = candidates.Max(candidate => candidate.votes);
+                foreach (var candidate in candidates)
                 {
                     if (candidate.votes == mostVotes)
                     {
