@@ -9,7 +9,7 @@ namespace entra21_tests
         private List<Candidate> candidates {get; set;}
 
         public IReadOnlyCollection<Candidate> Candidates => candidates;
-
+        
         public bool TryCreateCandidates(List<(string name, string cpf)> candidatesInput, string password)
         {
             if (password == "Pa$$w0rd")
@@ -50,10 +50,10 @@ namespace entra21_tests
             }
             else
             {
-                var mostVotes = candidates.Max(candidate => candidate.GetVotes());
+                var mostVotes = candidates.Max(candidate => candidate.Votes);
                 foreach (var candidate in candidates)
                 {
-                    if (candidate.GetVotes() == mostVotes)
+                    if (candidate.Votes == mostVotes)
                     {
                         winners.Add(candidate);
                     }

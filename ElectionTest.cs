@@ -1,5 +1,6 @@
 using Xunit;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace entra21_tests
 {
@@ -56,6 +57,40 @@ namespace entra21_tests
             Assert.Equal(2, foundIds.Count);
         }
 
+        [Fact]
+        public void should_return_jonas_id()
+        {
+            var election = new Election();
+            (string name, string cpf) jonas1 = ("Jonas", "454.273.081.54");
+            (string name, string cpf) jonas2 = ("Jonas", "123.456.789.10");
+            var candidatesInput = new List<(string name, string cpf)>{jonas1, jonas2};
+            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+
+            var foundId = election.GetCandidateIdByCPF(jonas1.cpf);
+
+            Assert.Equal(election.Candidates.ElementAt(0).Id, foundId);
+        }
+
+        [Fact]
+        public void should_return_2_and_0_votes()
+        {
+            var election = new Election();
+            (string name, string cpf) jonas = ("Jonas", "454.273.081.54");
+            (string name, string cpf) ramos = ("Ramos", "123.456.789.10");
+            var candidatesInput = new List<(string name, string cpf)>{jonas, ramos};
+            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            var jonasId = election.GetCandidateIdsByName(jonas.name)[0];
+            var ramosId = election.GetCandidateIdsByName(ramos.name)[0];
+
+            election.Vote(jonasId);
+            election.Vote(jonasId);
+
+            var candidateJonas = election.Candidates.First(x => x.Id == jonasId);
+            var candidateRamos = election.Candidates.First(x => x.Id == ramosId);
+            Assert.Equal(2, candidateJonas.Votes);
+            Assert.Equal(0, candidateRamos.Votes);
+        }
+        
         [Fact]
         public void should_return_null_when_wrong_password()
         {

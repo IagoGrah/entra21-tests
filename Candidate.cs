@@ -10,7 +10,7 @@ namespace entra21_tests
 
         public string Cpf {get; private set;}
 
-        private int Votes {get; set;}
+        public int Votes {get; private set;}
 
         public Candidate(string name, string cpf)
         {
@@ -23,11 +23,6 @@ namespace entra21_tests
         public void Vote()
         {
             Votes++;
-        }
-
-        public int GetVotes()
-        {
-            return Votes;
         }
     }
 }
