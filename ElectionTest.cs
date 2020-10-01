@@ -124,5 +124,26 @@ namespace entra21_tests
 
             Assert.Equal(jonas.name, winners[0].Name);
         }
+
+        [Fact]
+        public void should_return_two_different_winners()
+        {
+            var election = new Election();
+            (string name, string cpf) jonas = ("Jonas", "454.273.081.54");
+            (string name, string cpf) ramos = ("Ramos", "123.456.789.10");
+            var candidatesInput = new List<(string name, string cpf)>{jonas, ramos};
+            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            var jonasId = election.GetCandidateIdsByName(jonas.name)[0];
+            var ramosId = election.GetCandidateIdsByName(ramos.name)[0];
+            election.Vote(jonasId);
+            election.Vote(ramosId);
+
+            var winners = election.Poll("Pa$$w0rd");
+
+            Assert.Equal(2, winners.Count);
+            Assert.True(jonasId == winners[0].Id ^ ramosId == winners[0].Id);
+            Assert.True(jonasId == winners[1].Id ^ ramosId == winners[1].Id);
+            Assert.NotEqual(winners[0].Id, winners[1].Id);
+        }
     }
 }
