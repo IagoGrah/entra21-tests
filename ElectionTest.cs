@@ -15,6 +15,7 @@ namespace entra21_tests
             bool result = election.TryCreateCandidates(candidatesInput, "WrongPassword123");
 
             Assert.False(result);
+            Assert.Empty(election.Candidates);
         }
         
         [Fact]
@@ -26,6 +27,19 @@ namespace entra21_tests
             bool result = election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
 
             Assert.True(result);
+            Assert.Equal(1, election.Candidates.Count);
+        }
+
+        [Fact]
+        public void should_return_empty_if_null_input()
+        {
+            var election = new Election();
+            List<(string name, string cpf)> candidatesInput = null;
+
+            bool result = election.TryCreateCandidates(candidatesInput, "WrongPassword123");
+
+            Assert.False(result);
+            Assert.Empty(election.Candidates);
         }
 
         [Fact]

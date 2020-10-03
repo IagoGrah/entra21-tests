@@ -10,11 +10,20 @@ namespace entra21_tests
 
         public IReadOnlyCollection<Candidate> Candidates => candidates;
         
+        public Election()
+        {
+            candidates = new List<Candidate>();
+        }
+        
         public bool TryCreateCandidates(List<(string name, string cpf)> candidatesInput, string password)
         {
             if (password == "Pa$$w0rd")
             {
-                candidates = candidatesInput.Select(candidate => {return (new Candidate(candidate.name, candidate.cpf));}).ToList();
+                if (candidatesInput == null)
+                {
+                    return true;
+                }
+                candidates = candidatesInput.Select(candidate => {return new Candidate(candidate.name, candidate.cpf);}).ToList();
                 return true;
             }
             else
