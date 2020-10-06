@@ -15,7 +15,7 @@ namespace entra21_tests
             candidates = new List<Candidate>();
         }
         
-        public bool TryCreateCandidates(List<(string name, string cpf)> candidatesInput, string password)
+        public bool TryCreateCandidates(List<Candidate> candidatesInput, string password)
         {
             if (password == "Pa$$w0rd")
             {
@@ -23,7 +23,7 @@ namespace entra21_tests
                 {
                     return true;
                 }
-                candidates = candidatesInput.Select(candidate => {return new Candidate(candidate.name, candidate.cpf);}).ToList();
+                candidates.AddRange(candidatesInput);
                 return true;
             }
             else
