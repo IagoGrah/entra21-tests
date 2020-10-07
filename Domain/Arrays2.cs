@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace entra21_tests
+namespace Domain
 {
     public class Arrays2
     {

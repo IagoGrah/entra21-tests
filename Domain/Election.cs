@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace entra21_tests
+namespace Domain
 {
     public class Election
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace entra21_tests
+namespace Domain
 {
     public class Exercicios
     {
