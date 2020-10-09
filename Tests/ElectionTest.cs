@@ -11,10 +11,10 @@ namespace Tests
         {
             var MockCandidates = new List<Candidate>
             {
-                new Candidate("Jonas", "123.456.789-10"),
-                new Candidate("Ramos", "109.876.543-21"),
-                new Candidate("Bezos", "102.352.109-18"),
-                new Candidate("Jesus", "123.456.543-21")
+                new Candidate("Jonas", "814.460.920-46"),
+                new Candidate("Ramos", "479.066.260-87"),
+                new Candidate("Bezos", "481.529.140-37"),
+                new Candidate("Jesus", "047.126.800-32")
             };
 
             return MockCandidates.Take(amount).ToList();
@@ -73,8 +73,8 @@ namespace Tests
         public void should_return_2_ids()
         {
             var election = new Election();
-            var jonas1 = new Candidate("Jonas", "454.273.081.54");
-            var jonas2 = new Candidate("Jonas", "123.456.789.10");
+            var jonas1 = new Candidate("Jonas", "814.460.920-46");
+            var jonas2 = new Candidate("Jonas", "479.066.260-87");
             var candidatesInput = new List<Candidate>{jonas1, jonas2};
             election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
 
@@ -87,8 +87,8 @@ namespace Tests
         public void should_return_jonas1_id()
         {
             var election = new Election();
-            var jonas1 = new Candidate("Jonas", "454.273.081.54");
-            var jonas2 = new Candidate("Jonas", "123.456.789.10");
+            var jonas1 = new Candidate("Jonas", "814.460.920-46");
+            var jonas2 = new Candidate("Jonas", "479.066.260-87");
             var candidatesInput = new List<Candidate>{jonas1, jonas2};
             election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
 
@@ -98,14 +98,27 @@ namespace Tests
         }
 
         [Fact]
+        public void should_return_false_and_not_vote_when_cpf_is_invalid()
+        {
+            var election = new Election();
+            var candidatesInput = GetMockCandidates(1);
+            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+
+            var hasVoted = election.Vote("Wrong CPF");
+
+            Assert.Equal(0, candidatesInput[0].Votes);
+            Assert.False(hasVoted);
+        }
+        
+        [Fact]
         public void should_return_2_and_0_votes()
         {
             var election = new Election();
             var candidatesInput = GetMockCandidates(2);
             election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
 
-            election.Vote(candidatesInput[0].Id);
-            election.Vote(candidatesInput[0].Id);
+            election.Vote(candidatesInput[0].Cpf);
+            election.Vote(candidatesInput[0].Cpf);
 
             Assert.Equal(2, candidatesInput[0].Votes);
             Assert.Equal(0, candidatesInput[1].Votes);
@@ -117,7 +130,7 @@ namespace Tests
             var election = new Election();
             var candidatesInput = GetMockCandidates(2);
             election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
-            election.Vote(candidatesInput[0].Id);
+            election.Vote(candidatesInput[0].Cpf);
 
             var winners = election.Poll("WrongPassword123");
 
@@ -130,7 +143,7 @@ namespace Tests
             var election = new Election();
             var candidatesInput = GetMockCandidates(2);
             election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
-            election.Vote(candidatesInput[0].Id);
+            election.Vote(candidatesInput[0].Cpf);
 
             var winners = election.Poll("Pa$$w0rd");
 
@@ -143,8 +156,8 @@ namespace Tests
             var election = new Election();
             var candidatesInput = GetMockCandidates(2);
             election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
-            election.Vote(candidatesInput[0].Id);
-            election.Vote(candidatesInput[1].Id);
+            election.Vote(candidatesInput[0].Cpf);
+            election.Vote(candidatesInput[1].Cpf);
 
             var winners = election.Poll("Pa$$w0rd");
 

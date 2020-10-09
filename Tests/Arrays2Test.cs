@@ -6,15 +6,19 @@ namespace Tests
     public class zUmTests
     {
         [Theory]
-        [InlineData(new double[]{5,4,3,2,1}, new double[]{6,7,8,9})]
+        [InlineData(new double[]{5,4,3,2}, new double[]{6,7,8,9})]
         public void should_return_switched_arrays(double[] inputA, double[] inputB)
         {
             var arrays2 = new Arrays2();
+            var originalA = new double[inputA.Length];
+            var originalB = new double[inputB.Length];
+            inputA.CopyTo(originalA, 0);
+            inputB.CopyTo(originalB, 0);
 
             var result = arrays2.zUm(inputA, inputB);
 
-            Assert.Equal(inputB, result.A);
-            Assert.Equal(inputA, result.B);
+            Assert.Equal(originalB, result.A);
+            Assert.Equal(originalA, result.B);
         }
     }
 
