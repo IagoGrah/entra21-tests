@@ -1,34 +1,33 @@
 using System;
 using System.Linq;
+using System.Text;
 
 namespace Domain
 {
     public class Candidate
     {
-        public Guid Id {get; private set;}
+        public Guid Id {get; private set;} = Guid.NewGuid();
 
         public string Name {get; private set;}
 
         public string Cpf {get; private set;}
 
-        public int Votes {get; private set;}
+        public int Votes {get; private set;} = 0;
 
         public Candidate(string name, string cpf)
         {
-            this.Id = Guid.NewGuid();
             this.Name = name;
             this.Cpf = cpf;
-            this.Votes = 0;
         }
 
-        public bool ValidateCPF(string inputCPF)
+        public bool ValidateCPF()
         {
-            if (string.IsNullOrEmpty(inputCPF))
+            if (string.IsNullOrEmpty(this.Cpf))
             {
                 return false;
             }
 
-            var cpf = inputCPF.Replace(".", "").Replace("-", "");
+            var cpf = this.Cpf.Replace(".", "").Replace("-", "").Replace(" ", "");
 
             if (cpf.Length != 11)
             {
@@ -88,6 +87,37 @@ namespace Domain
 
             return false;
         }
+
+        public bool ValidateName()
+        {
+            if (string.IsNullOrEmpty(this.Name))
+            {
+                return false;
+            }
+            
+            if (!Name.All(char.IsLetter))
+            {
+                return false;
+            }
+            
+            // Fix capitalization
+            // var newName = new StringBuilder();
+            // for (int i = 0; i < Name.Length; i++)
+            // {
+            //     if (i==0)
+            //     {
+            //         newName.Append(name[i].ToString().ToUpper());
+            //     }
+            //     else
+            //     {
+            //         newName.Append(Name[i].ToString().ToLower());
+            //     }
+            // }
+            // Name = newName.ToString();
+
+            return true;
+        }
+
         public void Vote()
         {
             Votes++;
