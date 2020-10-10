@@ -7,7 +7,13 @@ namespace Domain
     {
         public (double[] A, double[] B) zUm(double[] A, double[] B)
         {
-            return (B, A);
+            // return (B, A);
+            var temp = new double[A.Length];
+            A.CopyTo(temp, 0);
+            B.CopyTo(A, 0);
+            temp.CopyTo(B, 0);
+
+            return (A, B);
         }
 
         public bool zDois(double[] arr)

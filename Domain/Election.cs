@@ -43,10 +43,15 @@ namespace Domain
             return foundCandidates.Select(x => x.Id).ToList();
         }
 
-        public void Vote(Guid id)
+        public bool Vote(string cpf)
         {
-            var votedCandidate = candidates.Find(x => x.Id == id);
+            var votedCandidate = candidates.FirstOrDefault(x => x.Cpf == cpf);
+            if (votedCandidate == null)
+            {
+                return false;
+            }
             votedCandidate.Vote();
+            return true;
         }
 
         public List<Candidate> Poll(string password)
