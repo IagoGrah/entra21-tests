@@ -15,7 +15,7 @@ namespace Domain
             candidates = new List<Candidate>();
         }
         
-        public bool TryCreateCandidates(List<Candidate> candidatesInput, string password)
+        public bool CreateCandidates(List<Candidate> candidatesInput, string password)
         {
             if (password == "Pa$$w0rd")
             {

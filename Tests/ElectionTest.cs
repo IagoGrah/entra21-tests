@@ -26,7 +26,7 @@ namespace Tests
             var election = new Election();
             var candidatesInput = GetMockCandidates(1);
 
-            bool result = election.TryCreateCandidates(candidatesInput, "WrongPassword123");
+            bool result = election.CreateCandidates(candidatesInput, "WrongPassword123");
 
             Assert.False(result);
             Assert.Empty(election.Candidates);
@@ -38,7 +38,7 @@ namespace Tests
             var election = new Election();
             var candidatesInput = GetMockCandidates(1);
 
-            bool result = election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            bool result = election.CreateCandidates(candidatesInput, "Pa$$w0rd");
 
             Assert.True(result);
             Assert.Equal(1, election.Candidates.Count);
@@ -50,7 +50,7 @@ namespace Tests
             var election = new Election();
             List<Candidate> candidatesInput = null;
 
-            bool result = election.TryCreateCandidates(candidatesInput, "WrongPassword123");
+            bool result = election.CreateCandidates(candidatesInput, "WrongPassword123");
 
             Assert.False(result);
             Assert.Empty(election.Candidates);
@@ -61,7 +61,7 @@ namespace Tests
         {
             var election = new Election();
             var candidatesInput = GetMockCandidates(2);
-            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            election.CreateCandidates(candidatesInput, "Pa$$w0rd");
 
             var firstId = election.GetCandidateIdsByName(candidatesInput[0].Name)[0];
             var secondId = election.GetCandidateIdsByName(candidatesInput[1].Name)[0];
@@ -76,7 +76,7 @@ namespace Tests
             var jonas1 = new Candidate("Jonas", "814.460.920-46");
             var jonas2 = new Candidate("Jonas", "479.066.260-87");
             var candidatesInput = new List<Candidate>{jonas1, jonas2};
-            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            election.CreateCandidates(candidatesInput, "Pa$$w0rd");
 
             var foundIds = election.GetCandidateIdsByName("Jonas");
 
@@ -90,7 +90,7 @@ namespace Tests
             var jonas1 = new Candidate("Jonas", "814.460.920-46");
             var jonas2 = new Candidate("Jonas", "479.066.260-87");
             var candidatesInput = new List<Candidate>{jonas1, jonas2};
-            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            election.CreateCandidates(candidatesInput, "Pa$$w0rd");
 
             var foundId = election.GetCandidateIdByCPF(jonas1.Cpf);
 
@@ -102,7 +102,7 @@ namespace Tests
         {
             var election = new Election();
             var candidatesInput = GetMockCandidates(1);
-            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            election.CreateCandidates(candidatesInput, "Pa$$w0rd");
 
             var hasVoted = election.Vote("Wrong CPF");
 
@@ -115,7 +115,7 @@ namespace Tests
         {
             var election = new Election();
             var candidatesInput = GetMockCandidates(2);
-            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            election.CreateCandidates(candidatesInput, "Pa$$w0rd");
 
             election.Vote(candidatesInput[0].Cpf);
             election.Vote(candidatesInput[0].Cpf);
@@ -129,7 +129,7 @@ namespace Tests
         {
             var election = new Election();
             var candidatesInput = GetMockCandidates(2);
-            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            election.CreateCandidates(candidatesInput, "Pa$$w0rd");
             election.Vote(candidatesInput[0].Cpf);
 
             var winners = election.Poll("WrongPassword123");
@@ -142,7 +142,7 @@ namespace Tests
         {
             var election = new Election();
             var candidatesInput = GetMockCandidates(2);
-            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            election.CreateCandidates(candidatesInput, "Pa$$w0rd");
             election.Vote(candidatesInput[0].Cpf);
 
             var winners = election.Poll("Pa$$w0rd");
@@ -155,7 +155,7 @@ namespace Tests
         {
             var election = new Election();
             var candidatesInput = GetMockCandidates(2);
-            election.TryCreateCandidates(candidatesInput, "Pa$$w0rd");
+            election.CreateCandidates(candidatesInput, "Pa$$w0rd");
             election.Vote(candidatesInput[0].Cpf);
             election.Vote(candidatesInput[1].Cpf);
 
