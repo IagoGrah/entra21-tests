@@ -94,26 +94,45 @@ namespace Domain
             {
                 return false;
             }
+
+            Name.Trim();
+
+            if (string.IsNullOrWhiteSpace(this.Name))
+            {
+                return false;
+            }
             
-            if (!Name.All(char.IsLetter))
+            if (!Name.All(x => char.IsLetter(x) || char.IsWhiteSpace(x)))
             {
                 return false;
             }
             
             // Fix capitalization
-            // var newName = new StringBuilder();
-            // for (int i = 0; i < Name.Length; i++)
-            // {
-            //     if (i==0)
-            //     {
-            //         newName.Append(name[i].ToString().ToUpper());
-            //     }
-            //     else
-            //     {
-            //         newName.Append(Name[i].ToString().ToLower());
-            //     }
-            // }
-            // Name = newName.ToString();
+            var newName = new StringBuilder();
+            for (int i = 0; i < Name.Length; i++)
+            {
+                if (i==0)
+                {
+                    newName.Append(Name[i].ToString().ToUpper());
+                }
+                else if (Name[i] == ' ')
+                {
+                    if (Name[i-1] == ' ') {continue;}
+                    newName.Append(Name[i].ToString());
+                }
+                else
+                {
+                    if (Name[i-1] == ' ')
+                    {
+                        newName.Append(Name[i].ToString().ToUpper());
+                    }
+                    else
+                    {
+                        newName.Append(Name[i].ToString().ToLower());
+                    }
+                }
+            }
+            Name = newName.ToString();
 
             return true;
         }

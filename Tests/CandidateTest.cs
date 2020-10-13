@@ -63,11 +63,9 @@ namespace Tests
 
         [Theory]
         [InlineData("J0n47h4n")]
-        [InlineData("Jo   nathan")]
-        [InlineData("Jonathan     ")]
-        [InlineData("  Jonathan")]
         [InlineData("J%#!(#*n")]
         [InlineData("!4@!")]
+        [InlineData(" ")]
         [InlineData("")]
         [InlineData(null)]
         public void should_return_false_when_invalid_name(string name)
@@ -83,6 +81,8 @@ namespace Tests
         [InlineData("Jonathan")]
         [InlineData("JONATHAN")]
         [InlineData("jonathan")]
+        [InlineData("Jonathan     ")]
+        [InlineData("  Jonathan")]
         [InlineData("j")]
         public void should_return_true_when_valid_name(string name)
         {
@@ -91,6 +91,18 @@ namespace Tests
             var isValid = candidate.ValidateName();
 
             Assert.True(isValid);
+        }
+
+        [Theory]
+        [InlineData("jOnatHan     frascO", "Jonathan Frasco")]
+        public void should_return_formatted_name(string name, string expected)
+        {
+            var candidate = new Candidate(name, "814.460.920-46");
+
+            var isValid = candidate.ValidateName();
+
+            Assert.True(isValid);
+            Assert.Equal(expected, candidate.Name);
         }
     }
 }
