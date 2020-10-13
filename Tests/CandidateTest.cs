@@ -95,6 +95,7 @@ namespace Tests
 
         [Theory]
         [InlineData("jOnatHan     frascO", "Jonathan Frasco")]
+        [InlineData("jOnatHan     frascO DE  OLIVEIRA", "Jonathan Frasco De Oliveira")]
         public void should_return_formatted_name(string name, string expected)
         {
             var candidate = new Candidate(name, "814.460.920-46");
